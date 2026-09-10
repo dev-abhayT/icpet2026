@@ -1,9 +1,15 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, DM_Sans } from 'next/font/google'
+import { Playfair_Display, DM_Sans, Montserrat } from 'next/font/google'
 // import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const playfairDisplay = Playfair_Display({ 
+  subsets: ["latin"],
+  variable: '--font-serif',
+  weight: ['400', '700']
+});
+
+const montserrat = Montserrat({
   subsets: ["latin"],
   variable: '--font-serif',
   weight: ['400', '700']
@@ -16,8 +22,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'ICPET 2026',
+  description: 'International Conference on Petroleum and Energy Transition 2026',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -44,7 +50,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${playfairDisplay.variable} ${dmSans.variable} bg-background`}>
+    <html lang="en" className={`${playfairDisplay.variable} ${dmSans.variable} ${montserrat.variable} bg-background`}>
       <body className="font-sans antialiased text-foreground">
         {children}
         {/* {process.env.NODE_ENV === 'production' && <Analytics />} */}
