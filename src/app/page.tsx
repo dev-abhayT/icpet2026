@@ -389,6 +389,10 @@ export default function ConferencePage() {
               </div>
             ))}
           </div>
+          <div>
+            <p className="font-sans text-foreground/70 text-sm mt-10">*The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.</p>
+          </div>
+
         </div>
       </section>
 
