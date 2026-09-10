@@ -373,7 +373,7 @@ export default function ConferencePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { title: 'Keynote Sessions', desc: 'Visionary speakers from industry and academia' },
-              { title: 'Technical Paper Presentations', desc: 'Latest research in petroleum and energy' },
+              { title: 'Technical Paper Presentations*', desc: 'Latest research in petroleum and energy' },
               { title: 'Panel Discussions', desc: 'Expert insights on industry trends' },
               { title: 'Industry Exhibition', desc: 'Technology showcase and vendor displays' },
               { title: 'Workshop & Short Courses', desc: 'Hands-on learning experiences' },
