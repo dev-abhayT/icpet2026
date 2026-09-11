@@ -121,7 +121,7 @@ export default function ConferencePage() {
             International Conference 
           </h1>
           <p className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight">on</p>
-          <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-accent mb-8 leading-tight">
+          <h1 className="font-playfair text-5xl sm:text-6xl lg:text-7xl font-bold text-accent mb-8 leading-tight">
             Petroleum and Energy Transition
           </h1>
 
@@ -141,7 +141,7 @@ export default function ConferencePage() {
           <div className="flex flex-wrap justify-center gap-2 mb-12">
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full text-white">
               <Calendar size={20} />
-              <span className="font-montserrat bold text-lg">November 2026</span>
+              <span className="font-montserrat bold text-lg">14th - 15th December 2026</span>
             </div>
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full text-white">
               <MapPin size={20} />
@@ -270,10 +270,11 @@ export default function ConferencePage() {
               </p>
             </div>
             <div className="h-96 bg-muted rounded-lg flex items-center justify-center">
-              <img
-                src="https://placehold.co/500x400/0A1F3B/C9A84C?text=Conference+Overview"
-                alt="Conference Overview Image"
-                className="w-full h-full object-cover rounded-lg"
+              <Image 
+              src='/petro_pump.jpg'
+              alt='ICPET 2026'
+              width={700}
+              height={500}
               />
             </div>
           </div>
@@ -282,8 +283,8 @@ export default function ConferencePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { label: '500+', value: 'Delegates' },
-              { label: '40+', value: 'Speakers' },
-              { label: '3', value: 'Days' },
+              { label: '100+', value: 'Speakers' },
+              { label: '2', value: 'Days' },
             ].map((stat, idx) => (
               <div key={idx} className="bg-card p-8 rounded-lg border border-border shadow-sm">
                 <p className="font-serif text-4xl font-bold text-accent mb-2">{stat.label}</p>
@@ -479,7 +480,7 @@ export default function ConferencePage() {
       {/* ===== CONTACT / CONVENORS ===== */}
       <section id="contact" className="py-24 bg-muted">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="font-serif text-4xl font-bold text-center mb-12 text-primary">Contacts</h2>
+          <h2 className="font-serif text-4xl font-bold text-center mb-12 text-primary">Organizing Committee</h2>
           
           {/* Contact Cards */}
           <div className="grid grid-cols-1 mb-10 justify-items-center px-4">
@@ -627,7 +628,7 @@ export default function ConferencePage() {
               </p>
             </div>
             <div>
-              <p className="font-sans text-sm text-white/70 mb-2">Quick Links</p>
+              <p className="font-sans text-sm text-white font-extrabold mb-2">Quick Links</p>
               <ul className="space-y-1 font-sans text-sm">
                 <li><a href="#about" className="text-white/70 hover:text-accent transition-colors">About</a></li>
                 <li><a href="#events" className="text-white/70 hover:text-accent transition-colors">Events</a></li>
@@ -636,11 +637,11 @@ export default function ConferencePage() {
               </ul>
             </div>
             <div>
-              <p className="font-sans text-sm text-white/70 mb-2">Contact</p>
+              <p className="font-sans text-sm text-white font-extrabold mb-2">Contact</p>
               <p className="font-sans text-sm text-white/70">
                 Department of Petroleum Engineering<br />
                 IIT Dhanbad, Dhanbad 826004, India<br />
-                Email: icpet2026@iitdhanbad.ac.in
+                Email: icpet2026@gmail.com
               </p>
             </div>
           </div>

@@ -5,13 +5,13 @@ import './globals.css'
 
 const playfairDisplay = Playfair_Display({ 
   subsets: ["latin"],
-  variable: '--font-serif',
+  variable: '--font-playfair',
   weight: ['400', '700']
 });
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: '--font-serif',
+  variable: '--font-montserrat',
   weight: ['400', '700']
 });
 
