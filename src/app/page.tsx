@@ -151,7 +151,7 @@ export default function ConferencePage() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-            <button className="px-8 py-3 bg-accent text-primary font-sans font-bold rounded hover:bg-accent/90 transition-colors">
+            <button className="px-8 py-3 bg-accent text-primary font-sans font-bold rounded hover:bg-accent/90 transition-colors" onClick={() => window.open("https://cmt3.research.microsoft.com/ICPET2026/", "_blank", "noopener,noreferrer")}>
               Register Now
             </button>
             
