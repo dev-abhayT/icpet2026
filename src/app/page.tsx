@@ -43,7 +43,7 @@ export default function ConferencePage() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex gap-8">
-              {['Home', 'About', 'Events', 'Themes', 'Venue', 'Contact'].map((link) => (
+              {['Home', 'About', 'Events', 'Themes','Abstracts', 'Venue', 'Contact'].map((link) => (
                 <button
                   key={link}
                   onClick={() => scrollToSection(link.toLowerCase())}
@@ -154,11 +154,18 @@ export default function ConferencePage() {
             <button className="px-8 py-3 bg-accent text-primary font-sans font-bold rounded hover:bg-accent/90 transition-colors" onClick={() => window.open("https://cmt3.research.microsoft.com/ICPET2026/", "_blank", "noopener,noreferrer")}>
               Register Now
             </button>
+
+            <button className="px-8 py-3 bg-accent text-primary font-sans font-bold rounded hover:bg-accent/90 transition-colors"
+            onClick={() => {scrollToSection("abstracts")}}>
+              Abstract Submission
+            </button>
             
             <button className="px-8 py-3 border-2 border-white text-white font-sans font-bold rounded hover:bg-white/10 transition-colors"
             onClick={() => {scrollToSection("about")}}>
               View Program
             </button>
+
+            
             
           </div>
 
@@ -404,16 +411,18 @@ export default function ConferencePage() {
 
           <div className="flex flex-wrap justify-center gap-4">
             {[
-              'Future of Petroleum in a Low-Carbon World',
-              'Energy Transition & Decarbonization Pathways',
-              'Hydrogen Economy & Alternative Fuels',
-              'Digitalization in Oil & Gas',
-              'Carbon Capture, Utilization and Storage (CCUS)',
-              'Data Analytics and Artificial Intelligence in Energy Industry',
-              'Sustainable Production, Storage and Transportation',
-              'Energy Security vs Sustainability',
-              'Resource and Reserve Management',
-              'Youth & Innovation in Energy',
+               'Advanced Petroleum Geoscience and Seismic Interpretation',
+        'Advanced Drilling, Well Engineering and Autonomous Subsurface Operations',
+        'Digital Reservoir Engineering, Simulation and Integrated Asset Management',
+        'Technological Developments in Production Operations, Flow Assurance, Asset Integrity and Smart Field Practices',
+        'Enhanced Oil Recovery and IOR Techniques',
+        'Smart Refining, Sustainable Petrochemicals and Process Intensification',
+        'Geothermal Energy Exploration and Development',
+        'Unconventional Energy Resources: Coal Bed Methane (CBM), Gas Hydrate and Shale Oil/Gas',
+        'Hydrogen Production, Carbon Capture Utilization and Storage (CCUS), Carbon Management and Net-Zero Energy Technologies',
+        'Underground Coal Gasification (UCG), Underground Energy Conversion, Syngas Production and Future Fuel Technologies',
+        'Energy Transition, Sustainability, Energy Security and Policy Innovation',
+        'Artificial Intelligence, Digital Transformation and Autonomous Energy Ecosystems',
             ].map((theme, idx) => (
               <div
                 key={idx}
@@ -425,6 +434,254 @@ export default function ConferencePage() {
           </div>
         </div>
       </section>
+
+      <section
+  id="abstracts"
+  className="py-24 bg-background border-t-2 border-b-2 border-accent"
+>
+  <div className="max-w-7xl mx-auto px-6">
+
+    {/* Heading */}
+    <div className="text-center mb-14">
+      <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-primary">
+        Abstract Submission - Details
+      </h2>
+
+      <p className="text-foreground/80 font-sans text-lg leading-relaxed max-w-4xl mx-auto">
+        Authors are requested to submit their abstracts through the
+        Microsoft Conference Management Toolkit (CMT). Please follow
+        the steps below carefully while preparing and submitting your
+        abstract.
+      </p>
+    </div>
+
+
+    {/* Important Resources */}
+    <div className="grid md:grid-cols-3 gap-6 mb-14">
+
+      {/* Instructions */}
+      <a
+        href="/documents/ICPET 2026 - Abstract Submission Instructions.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group border-2 border-accent rounded-xl p-6 hover:bg-accent/10 transition-colors"
+      >
+        <div className="text-accent font-bold font-sans text-sm uppercase tracking-wide mb-2">
+          Step 1
+        </div>
+
+        <h3 className="font-serif text-2xl font-bold text-primary mb-3">
+          Read the Instructions
+        </h3>
+
+        <p className="font-sans text-foreground/70 leading-relaxed mb-4">
+          Carefully read the author instructions before preparing your
+          abstract and submitting it through CMT.
+        </p>
+
+        <span className="font-sans font-bold text-accent">
+          View Instructions →
+        </span>
+      </a>
+
+
+      {/* Template */}
+      <a
+        href="/documents/ICPET26_Abstract_Template.docx"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group border-2 border-accent rounded-xl p-6 hover:bg-accent/10 transition-colors"
+      >
+        <div className="text-accent font-bold font-sans text-sm uppercase tracking-wide mb-2">
+          Step 2
+        </div>
+
+        <h3 className="font-serif text-2xl font-bold text-primary mb-3">
+          Prepare Your Abstract
+        </h3>
+
+        <p className="font-sans text-foreground/70 leading-relaxed mb-4">
+          Use the official ICPET 2026 abstract template to prepare your
+          submission according to the prescribed format.
+        </p>
+
+        <span className="font-sans font-bold text-accent">
+          Download Template →
+        </span>
+      </a>
+
+
+      {/* CMT */}
+      <a
+        href="https://cmt3.research.microsoft.com/ICPET2026/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group border-2 border-accent rounded-xl p-6 hover:bg-accent/10 transition-colors"
+      >
+        <div className="text-accent font-bold font-sans text-sm uppercase tracking-wide mb-2">
+          Step 3
+        </div>
+
+        <h3 className="font-serif text-2xl font-bold text-primary mb-3">
+          Submit Through CMT
+        </h3>
+
+        <p className="font-sans text-foreground/70 leading-relaxed mb-4">
+          Access the ICPET 2026 submission portal and submit your
+          completed abstract through Microsoft CMT.
+        </p>
+
+        <span className="font-sans font-bold text-accent">
+          Open Submission Portal →
+        </span>
+      </a>
+
+    </div>
+
+
+    {/* Submission Process */}
+    <div className="max-w-5xl mx-auto">
+
+      <h3 className="font-serif text-3xl font-bold text-primary text-center mb-10">
+        Submission Process
+      </h3>
+
+
+      {/* Step 1 */}
+      <div className="flex gap-5 mb-8">
+        <div className="shrink-0 w-10 h-10 rounded-full bg-accent text-white flex items-center justify-center font-bold font-sans">
+          1
+        </div>
+
+        <div>
+          <h4 className="font-serif text-xl font-bold text-primary mb-2">
+            Access the Submission Portal
+          </h4>
+
+          <p className="font-sans text-foreground/75 leading-relaxed">
+            Visit the ICPET 2026 submission portal through Microsoft
+            Conference Management Toolkit (CMT).
+          </p>
+
+          <a
+            href="https://cmt3.research.microsoft.com/ICPET2026/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-3 text-accent font-bold font-sans hover:underline"
+          >
+            Open ICPET 2026 CMT Portal →
+          </a>
+        </div>
+      </div>
+
+
+      {/* Step 2 */}
+      <div className="flex gap-5 mb-8">
+        <div className="shrink-0 w-10 h-10 rounded-full bg-accent text-white flex items-center justify-center font-bold font-sans">
+          2
+        </div>
+
+        <div>
+          <h4 className="font-serif text-xl font-bold text-primary mb-2">
+            Create or Access Your CMT Account
+          </h4>
+
+          <p className="font-sans text-foreground/75 leading-relaxed mb-3">
+            If you already have a Microsoft CMT account, log in using
+            your registered email address and password.
+          </p>
+
+          <p className="font-sans text-foreground/75 leading-relaxed">
+            If you do not have an account, select <strong>Register</strong>,
+            create your account using your institutional or professional
+            email address, and complete the verification process.
+          </p>
+        </div>
+      </div>
+
+
+      {/* Step 3 */}
+      <div className="flex gap-5 mb-8">
+        <div className="shrink-0 w-10 h-10 rounded-full bg-accent text-white flex items-center justify-center font-bold font-sans">
+          3
+        </div>
+
+        <div>
+          <h4 className="font-serif text-xl font-bold text-primary mb-2">
+            Create a New Submission
+          </h4>
+
+          <p className="font-sans text-foreground/75 leading-relaxed">
+            After logging in, open the ICPET 2026 conference page,
+            go to the <strong>Author Console</strong>, and select
+            <strong> + Create New Submission</strong>.
+          </p>
+        </div>
+      </div>
+
+
+      {/* Step 4 */}
+      <div className="flex gap-5 mb-8">
+        <div className="shrink-0 w-10 h-10 rounded-full bg-accent text-white flex items-center justify-center font-bold font-sans">
+          4
+        </div>
+
+        <div>
+          <h4 className="font-serif text-xl font-bold text-primary mb-2">
+            Enter Your Abstract Details
+          </h4>
+
+          <p className="font-sans text-foreground/75 leading-relaxed mb-3">
+            Enter the required information carefully, including:
+          </p>
+
+          <ul className="list-disc ml-6 space-y-1 font-sans text-foreground/75">
+            <li>Title of the abstract</li>
+            <li>Abstract text</li>
+            <li>Primary subject area</li>
+            <li>Authors and co-authors</li>
+          </ul>
+        </div>
+      </div>
+
+
+      {/* Step 5 */}
+      <div className="flex gap-5">
+        <div className="shrink-0 w-10 h-10 rounded-full bg-accent text-white flex items-center justify-center font-bold font-sans">
+          5
+        </div>
+
+        <div>
+          <h4 className="font-serif text-xl font-bold text-primary mb-2">
+            Review and Submit
+          </h4>
+
+          <p className="font-sans text-foreground/75 leading-relaxed">
+            Carefully review all the information entered in your
+            submission before completing the submission process.
+            Ensure that the abstract follows the prescribed template
+            and submission guidelines.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+
+    {/* Final CTA */}
+    <div className="text-center mt-10">
+      <a
+        href="https://cmt3.research.microsoft.com/ICPET2026/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block px-8 py-4 bg-accent text-white font-sans font-bold rounded-lg hover:opacity-90 transition-opacity"
+      >
+        Submit Your Abstract →
+      </a>
+    </div>
+
+  </div>
+</section>
 
       {/* ===== VENUE ===== */}
       <section id="venue" className="py-24 bg-background">
