@@ -7,6 +7,7 @@ import Image from 'next/image';
 export default function ConferencePage() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showToast, setShowToast] = useState(false);
   const logo_w = 125
   const logo_h = 125
 
@@ -151,9 +152,25 @@ export default function ConferencePage() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-            <button className="px-8 py-3 bg-accent text-primary font-sans font-bold rounded hover:bg-accent/90 transition-colors" onClick={() => window.open("https://cmt3.research.microsoft.com/ICPET2026/", "_blank", "noopener,noreferrer")}>
+            <button className="px-8 py-3 bg-accent text-primary font-sans font-bold rounded hover:bg-accent/90 transition-colors" onClick={() => {
+    setShowToast(true);
+
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+  }}>
               Register Now
             </button>
+
+          {showToast && (
+  <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
+    <div className="flex items-center gap-3 bg-[#0be628] text-black font-bold px-6 py-4 rounded-xl shadow-2xl">
+      <span className="font-sans">
+        Registrations to begin very soon!
+      </span>
+    </div>
+  </div>
+)}
 
             <button className="px-8 py-3 bg-accent text-primary font-sans font-bold rounded hover:bg-accent/90 transition-colors"
             onClick={() => {scrollToSection("abstracts")}}>
@@ -737,23 +754,34 @@ export default function ConferencePage() {
       {/* ===== CONTACT / CONVENORS ===== */}
       <section id="contact" className="py-24 bg-muted">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="font-serif text-4xl font-bold text-center mb-12 text-primary">Organizing Committee</h2>
+          <h2 className="font-serif text-4xl font-bold text-center mb-12 text-primary">Core Organizing Committee</h2>
           
           {/* Contact Cards */}
-          <div className="grid grid-cols-1 mb-10 justify-items-center px-4">
+          <div className="flex flex-col md:flex-row justify-center gap-8 mb-10 px-4">
             {[
               {
+                role: 'Convenor',
                 name: 'Prof. Vikas Mahto',
-                title: 'Head of Department & Convenor',
-                institute: 'Dept. of Petroleum Enginnering, IIT-ISM',
+                title: 'Professor (HAG) & Head',
+                institute: 'Dept. of Petroleum Enginnering, IIT(ISM)',
                 email: 'vikas@iitism.ac.in',
                 image: "/vikas_mahto.jpg"
               },
+              {
+                role: 'Co-Convenor',
+                name: 'Prof. Tarun Kumar Naiya',
+                title: 'Professor',
+                institute: 'Dept. of Petroleum Enginnering, IIT(ISM)',
+                email: 'tarunnaiya@iitism.ac.in',
+                image: "/tarun_naiya.jpg"
+              },
             
             ].map((contact, idx) => (
-              <div key={idx} className="bg-card p-8 rounded-lg border border-border text-center">
+              <div key={idx} className="bg-card p-8 rounded-lg border border-border text-center w-full md:w-[31%]">
+                <p className="font-serif text-lg font-bold text-accent mb-5">{contact.role}</p>
                 <div className="w-16 h-16 bg-muted overflow-hidden rounded-full mx-auto mb-4 flex items-center justify-center">
                   {/* <span className="font-serif text-2xl font-bold text-accent">{contact.name.charAt(0)}</span> */}
+                  
                   <Image
                src={contact.image}
                alt='hod'
@@ -776,29 +804,35 @@ export default function ConferencePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {[
+              
               {
-                name: 'Prof. Tarun Kumar Naiya',
-                title: 'Co-Convenor',
-                institute: 'Dept. of Petroleum Enginnering, IIT-ISM',
-                email: 'tarunnaiya@iitism.ac.in',
-                image: "/tarun_naiya.jpg"
-              },
-              {
+                role: 'Co-Convenor',
                 name: 'Prof. Chandan Sahu',
-                title: 'Co-Convenor',
+                title: 'Assistant Professor',
                 institute: 'Dept. of Petroleum Enginnering, IIT-ISM',
                 email: 'chandansahu@iitism.ac.in',
                 image: "/chandan_sahu.jpeg"
               },
               {
+                role: 'Co-Convenor',
                 name: 'Prof. Hamid Siddique',
-                title: 'Co-Convenor',
+                title: 'Assistant Professor',
                 institute: 'Dept. of Petroleum Engineering, IIT-ISM',
-                email: 'hamid@iitism.ac.in',
+                email: 'mhsiddique@iitism.ac.in',
                 image: "/hamid_siddique.jpg"
+              },
+              {
+                role: 'Co-Convenor',
+                name: 'Prof. Siddharth Gautam',
+                title: 'Assistant Professor',
+                institute: 'Dept. of Petroleum Enginnering, IIT-ISM',
+                email: 'sidharth@iitism.ac.in',
+                image: "/s_gautam.webp"
               },
             ].map((contact, idx) => (
               <div key={idx} className="bg-card p-8 rounded-lg border border-border text-center">
+              <p className="font-serif text-lg font-bold text-accent mb-5">{contact.role}</p>
+
                 <div className="w-16 h-16 bg-muted overflow-hidden rounded-full mx-auto mb-4 flex items-center justify-center">
                   {/* <span className="font-serif text-2xl font-bold text-accent">{contact.name.charAt(0)}</span> */}
                   <Image
@@ -890,6 +924,7 @@ export default function ConferencePage() {
                 <li><a href="#about" className="text-white/70 hover:text-accent transition-colors">About</a></li>
                 <li><a href="#events" className="text-white/70 hover:text-accent transition-colors">Events</a></li>
                 <li><a href="#themes" className="text-white/70 hover:text-accent transition-colors">Themes</a></li>
+                <li><a href="#abstracts" className="text-white/70 hover:text-accent transition-colors">Abstract Submission</a></li>
                 <li><a href="#venue" className="text-white/70 hover:text-accent transition-colors">Venue</a></li>
               </ul>
             </div>
@@ -897,7 +932,7 @@ export default function ConferencePage() {
               <p className="font-sans text-sm text-white font-extrabold mb-2">Contact</p>
               <p className="font-sans text-sm text-white/70">
                 Department of Petroleum Engineering<br />
-                IIT Dhanbad, Dhanbad 826004, India<br />
+                IIT(ISM) Dhanbad, Dhanbad 826004, India<br />
                 Email: icpet2026@gmail.com
               </p>
             </div>
