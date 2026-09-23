@@ -822,7 +822,7 @@ export default function ConferencePage() {
                 image: "/hamid_siddique.jpg"
               },
               {
-                role: 'Co-Convenor',
+                role: 'Organizing Secretary',
                 name: 'Prof. Siddharth Gautam',
                 title: 'Assistant Professor',
                 institute: 'Dept. of Petroleum Enginnering, IIT-ISM',
