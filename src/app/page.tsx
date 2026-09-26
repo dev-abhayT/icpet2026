@@ -152,25 +152,12 @@ export default function ConferencePage() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-            <button className="px-8 py-3 bg-accent text-primary font-sans font-bold rounded hover:bg-accent/90 transition-colors" onClick={() => {
-    setShowToast(true);
-
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
+            <button className="px-8 py-3 bg-accent text-primary font-sans font-bold rounded hover:bg-accent/90 transition-colors" onClick={() => { window.open("https://forms.gle/Srk6fnJbCch8V5LV8", "_blank", "noopener,noreferrer")
   }}>
               Register Now
             </button>
 
-          {showToast && (
-  <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
-    <div className="flex items-center gap-3 bg-[#0be628] text-black font-bold px-6 py-4 rounded-xl shadow-2xl">
-      <span className="font-sans">
-        Registrations to begin very soon!
-      </span>
-    </div>
-  </div>
-)}
+        
 
             <button className="px-8 py-3 bg-accent text-primary font-sans font-bold rounded hover:bg-accent/90 transition-colors"
             onClick={() => {scrollToSection("abstracts")}}>
@@ -767,14 +754,6 @@ export default function ConferencePage() {
                 email: 'vikas@iitism.ac.in',
                 image: "/vikas_mahto.jpg"
               },
-              {
-                role: 'Co-Convenor',
-                name: 'Prof. Tarun Kumar Naiya',
-                title: 'Professor',
-                institute: 'Dept. of Petroleum Enginnering, IIT(ISM)',
-                email: 'tarunnaiya@iitism.ac.in',
-                image: "/tarun_naiya.jpg"
-              },
             
             ].map((contact, idx) => (
               <div key={idx} className="bg-card p-8 rounded-lg border border-border text-center w-full md:w-[31%]">
@@ -804,7 +783,14 @@ export default function ConferencePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {[
-              
+              {
+                role: 'Co-Convenor',
+                name: 'Prof. Tarun Kumar Naiya',
+                title: 'Professor',
+                institute: 'Dept. of Petroleum Enginnering, IIT(ISM)',
+                email: 'tarunnaiya@iitism.ac.in',
+                image: "/tarun_naiya.jpg"
+              },
               {
                 role: 'Co-Convenor',
                 name: 'Prof. Chandan Sahu',
@@ -821,14 +807,7 @@ export default function ConferencePage() {
                 email: 'mhsiddique@iitism.ac.in',
                 image: "/hamid_siddique.jpg"
               },
-              {
-                role: 'Organizing Secretary',
-                name: 'Prof. Siddharth Gautam',
-                title: 'Assistant Professor',
-                institute: 'Dept. of Petroleum Enginnering, IIT-ISM',
-                email: 'sidharth@iitism.ac.in',
-                image: "/s_gautam.webp"
-              },
+              
             ].map((contact, idx) => (
               <div key={idx} className="bg-card p-8 rounded-lg border border-border text-center">
               <p className="font-serif text-lg font-bold text-accent mb-5">{contact.role}</p>
@@ -838,6 +817,42 @@ export default function ConferencePage() {
                   <Image
                src={contact.image}
                alt='co-convenor'
+               height={100}
+               width={100}
+                   />
+                </div>
+                <p className="font-serif text-lg font-bold text-primary mb-2">{contact.name}</p>
+                <p className="font-sans text-sm text-accent font-semibold mb-1">{contact.title}</p>
+                <p className="font-sans text-xs text-foreground/70 mb-4">{contact.institute}</p>
+                <a
+                  href={`mailto:${contact.email}`}
+                  className="inline-flex items-center gap-2 text-accent hover:text-primary font-sans text-sm font-semibold transition-colors"
+                >
+                  <Mail size={16} />
+                  {contact.email}
+                </a>
+              </div>
+            ))}
+          </div><div className="flex flex-col md:flex-row justify-center gap-8 mb-10 px-4">
+            {[
+              {
+                role: 'Organizing Secretary',
+                name: 'Prof. Siddharth Gautam',
+                title: 'Assistant Professor',
+                institute: 'Dept. of Petroleum Enginnering, IIT(ISM)',
+                email: 'siddarth@iitism.ac.in',
+                image: "/s_gautam.webp"
+              },
+            
+            ].map((contact, idx) => (
+              <div key={idx} className="bg-card p-8 rounded-lg border border-border text-center w-full md:w-[31%]">
+                <p className="font-serif text-lg font-bold text-accent mb-5">{contact.role}</p>
+                <div className="w-16 h-16 bg-muted overflow-hidden rounded-full mx-auto mb-4 flex items-center justify-center">
+                  {/* <span className="font-serif text-2xl font-bold text-accent">{contact.name.charAt(0)}</span> */}
+                  
+                  <Image
+               src={contact.image}
+               alt='hod'
                height={100}
                width={100}
                    />
