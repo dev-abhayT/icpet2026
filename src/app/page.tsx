@@ -4,12 +4,115 @@ import { useState, useEffect } from 'react';
 import { Menu, X, MapPin, Calendar, Mail} from 'lucide-react';
 import Image from 'next/image';
 
+
+
 export default function ConferencePage() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const logo_w = 125
   const logo_h = 125
+  const MEMBERS_PER_PAGE = 4;
+  const internationalCommittee = [
+  {
+    name: "Prof. Sanjay Srinivasan",
+    institution: "Penn State University",
+    country: "USA",
+    image: "/committee/sanjay-srinivasan.png",
+  },
+  {
+    name: "Prof. Hemant Sarma",
+    institution: "University of Calgary",
+    country: "Canada",
+    image: "/committee/hemant-sarma.png",
+  },
+  {
+    name: "Prof. Anil Mehrotra",
+    institution: "University of Calgary",
+    country: "Canada",
+    image: "/committee/anil-mehrotra.png",
+  },
+  {
+    name: "Prof. Hari Vuthaluru",
+    institution: "Curtin University",
+    country: "Australia",
+    image: "/committee/hari-vuthaluru.png",
+  },
+  {
+    name: "Prof. Pisupati Sarma",
+    institution: "Penn State University",
+    country: "USA",
+    image: "/committee/pisupati-sarma.png",
+  },
+  {
+    name: "Prof. Mukul Sharma",
+    institution: "Texas & Austin",
+    country: "USA",
+    image: "/committee/mukul-sharma.png",
+  },
+  {
+    name: "Prof. Robello Samuel",
+    institution: "University of Houston",
+    country: "USA",
+    image: "/committee/robello-samuel.png",
+  },
+  {
+    name: "Prof. Saeedi Ali",
+    institution: "Curtin University",
+    country: "Australia",
+    image: "/committee/saeedi-ali.png",
+  },
+  {
+    name: "Prof. Hussain Hoteit",
+    institution: "KAUST",
+    country: "KSA",
+    image: "/committee/hussain-hoteit.png",
+  },
+  {
+    name: "Prof. Saad Al-Afnan",
+    institution: "KFUPM",
+    country: "KSA",
+    image: "/committee/saad-al-afnan.png",
+  },
+  {
+    name: "Prof. Marcio Augusto Sampaio Pinto",
+    institution: "USP",
+    country: "Brazil",
+    image: "/committee/marcio-pinto.png",
+  },
+  {
+    name: "Prof. Japan Trivedi",
+    institution: "University of Alberta",
+    country: "Canada",
+    image: "/committee/japan-trivedi.png",
+  },
+];
+
+const [committeePage, setCommitteePage] = useState(0);
+const [showAllCommittee, setShowAllCommittee] = useState(false);
+
+const totalPages = Math.ceil(
+  internationalCommittee.length / MEMBERS_PER_PAGE
+);
+
+const visibleCommittee = showAllCommittee
+  ? internationalCommittee
+  : internationalCommittee.slice(
+      committeePage * MEMBERS_PER_PAGE,
+      committeePage * MEMBERS_PER_PAGE + MEMBERS_PER_PAGE
+    );
+
+
+// Automatically move to the next group
+useEffect(() => {
+  if (showAllCommittee) return;
+
+  const interval = setInterval(() => {
+    setCommitteePage((prev) => (prev + 1) % totalPages);
+  }, 5000);
+
+  return () => clearInterval(interval);
+}, [showAllCommittee, totalPages]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,76 +130,111 @@ export default function ConferencePage() {
     }
   };
 
+  
+
   return (
     <div className="bg-background text-foreground">
       {/* ===== NAVBAR ===== */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled ? 'bg-primary shadow-lg' : 'bg-transparent'
       }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <div className={`${
-              isScrolled ? 'text-xl font-montserrat font-bold transition-colors text-accent' : 'text-transparent'
-            }`}>
-              ICPET 2026
-            </div>
+       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex gap-8">
-              {['Home', 'About', 'Events', 'Themes','Abstracts', 'Venue', 'Contact'].map((link) => (
-                <button
-                  key={link}
-                  onClick={() => scrollToSection(link.toLowerCase())}
-                  className={`${
-                    isScrolled
-                      ? 'text-sm font-medium transition-colors text-white hover:text-accent'
-                      : 'text-transparent'
-                  }`}
-                >
-                  {link}
-                </button>
-              ))}
-            </div>
+  <div className="flex items-center h-16">
 
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? (
-                <X className={isScrolled ? 'text-white' : 'text-primary'} />
-              ) : (
-                <Menu className={isScrolled ? 'text-white' : 'text-primary'} />
-              )}
-            </button>
-          </div>
+    {/* Logo + Brand */}
+    <div
+      className={`flex items-center gap-3 transition-all duration-500 ${
+        isScrolled
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 -translate-y-2 pointer-events-none'
+      }`}
+    >
+      <Image
+        src="/logo.png"
+        alt="ICPET 2026"
+        width={30}
+        height={30}
+        className="object-contain"
+      />
 
-          {/* Mobile Navigation */}
-          {mobileMenuOpen && (
-            <div className={`pb-4 md:hidden space-y-2 ${isScrolled ? 'bg-primary' : ''}`}>
-              {['Home', 'About', 'Events', 'Themes', 'Venue', 'Contact'].map((link) => (
-                <button
-                  key={link}
-                  onClick={() => scrollToSection(link.toLowerCase())}
-                  className={`block w-full text-left px-4 py-2 text-sm font-medium rounded transition-colors ${
-                    isScrolled
-                      ? 'text-white hover:bg-primary/80'
-                      : 'text-primary hover:bg-accent/10'
-                  }`}
-                >
-                  {link}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
+      <div className="text-xl font-montserrat font-bold text-accent whitespace-nowrap">
+        ICPET 2026
+      </div>
+    </div>
+
+
+    {/* Desktop Navigation */}
+    <div className="hidden md:flex gap-8 ml-auto">
+
+      {['Home', 'About', 'Events', 'Themes', 'Committee', 'Abstracts', 'Venue', 'Contact'].map((link) => (
+        <button
+          key={link}
+          onClick={() => scrollToSection(link.toLowerCase())}
+          className={`${
+            isScrolled
+              ? 'text-sm font-medium transition-colors text-white hover:text-accent'
+              : 'text-transparent'
+          }`}
+        >
+          {link}
+        </button>
+      ))}
+
+    </div>
+
+
+    {/* Mobile Menu Button */}
+    <button
+      className="md:hidden ml-auto"
+      onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+    >
+      {mobileMenuOpen ? (
+        <X
+          className={isScrolled ? 'text-white' : 'text-primary'}
+        />
+      ) : (
+        <Menu
+          className={isScrolled ? 'text-white' : 'text-primary'}
+        />
+      )}
+    </button>
+
+  </div>
+
+
+  {/* Mobile Navigation */}
+  {mobileMenuOpen && (
+    <div
+      className={`pb-4 md:hidden space-y-2 ${
+        isScrolled ? 'bg-primary' : ''
+      }`}
+    >
+
+      {['Home', 'About', 'Events', 'Themes', 'Venue', 'Contact'].map((link) => (
+        <button
+          key={link}
+          onClick={() => scrollToSection(link.toLowerCase())}
+          className={`block w-full text-left px-4 py-2 text-sm font-medium rounded transition-colors ${
+            isScrolled
+              ? 'text-white hover:bg-primary/80'
+              : 'text-primary hover:bg-accent/10'
+          }`}
+        >
+          {link}
+        </button>
+      ))}
+
+    </div>
+  )}
+
+</div>
       </nav>
 
       {/* ===== HERO SECTION ===== */}
       <section
         id="home"
-        className="relative min-h-screen bg-primary flex items-center justify-center pt-16"
+        className=" relative min-h-screen bg-primary flex items-center justify-center pt-8"
         
       >
         <div className="absolute inset-0 opacity-40"
@@ -109,13 +247,21 @@ export default function ConferencePage() {
 
         
         <div className="absolute inset-0 bg-black/40"></div>
-        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+        <div className="relative z-10 max-w-7xl mx-auto text-center">
           {/* Badge */}
           <div className="mb-4 inline-block">
             <span className="text-accent font-sans font-bold text-lg tracking-widest uppercase">
               ICPET 2026
             </span>
           </div>
+          <div className="flex justify-center mb-4">
+          <Image
+        src="/logo.png"
+        alt="ICPET 2026"
+        width={150}
+        height={150}
+        className="object-contain"
+      /></div>
 
           {/* Main Heading */}
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
@@ -438,6 +584,247 @@ export default function ConferencePage() {
           </div>
         </div>
       </section>
+
+      <section
+  id="committee"
+  className="py-24 bg-background border-t-2 border-b-2 border-accent"
+>
+  <div className="max-w-7xl mx-auto px-6">
+
+    {/* Section Heading */}
+    <div className="text-center mb-12">
+
+      <h2 className="font-serif text-4xl font-bold mb-4">
+        Advisory Committee
+      </h2>
+
+      <p className="text-foreground/70 font-sans text-lg max-w-3xl mx-auto">
+        Distinguished experts and academicians from across the world
+        contributing their expertise to ICPET 2026.
+      </p>
+
+    </div>
+
+
+    {/* International Advisory Committee */}
+    <div>
+
+      <h3 className="font-serif text-3xl font-bold text-center mb-10">
+        International Advisory Committee
+      </h3>
+
+
+      {/* Committee Cards */}
+      <div className="relative">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          {visibleCommittee.map((member, index) => (
+
+            <div
+              key={member.name}
+              className="
+                flex items-center gap-5
+                bg-white/5
+                border border-foreground/10
+                rounded-xl
+                p-5
+                transition-all
+                duration-500
+                hover:-translate-y-1
+                hover:shadow-lg
+              "
+            >
+
+              {/* Photo */}
+              <div className="flex-shrink-0">
+
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  width={110}
+                  height={110}
+                  className="
+                    w-[110px]
+                    h-[110px]
+                    object-cover
+                    rounded-lg
+                  "
+                />
+
+              </div>
+
+
+              {/* Information */}
+              <div>
+
+                <h4 className="
+                  font-sans
+                  text-xl
+                  font-bold
+                  text-accent
+                  leading-tight
+                ">
+                  {member.name}
+                </h4>
+
+                <p className="
+                  mt-2
+                  text-base
+                  text-foreground/80
+                ">
+                  {member.institution}
+                </p>
+
+                <p className="
+                  text-sm
+                  text-foreground/60
+                  mt-1
+                ">
+                  {member.country}
+                </p>
+
+              </div>
+
+            </div>
+
+          ))}
+
+        </div>
+
+
+        {/* Navigation Buttons */}
+        {!showAllCommittee && (
+          <div className="flex justify-center items-center gap-6 mt-8">
+
+            {/* Previous */}
+            <button
+              onClick={() =>
+                setCommitteePage(
+                  (prev) =>
+                    (prev - 1 + totalPages) % totalPages
+                )
+              }
+              className="
+                w-10
+                h-10
+                rounded-full
+                border
+                border-accent
+                text-accent
+                hover:bg-accent
+                hover:text-primary
+                transition-colors
+                flex
+                items-center
+                justify-center
+              "
+              aria-label="Previous committee members"
+            >
+              ←
+            </button>
+
+
+            {/* Page Indicators */}
+            <div className="flex gap-2">
+
+              {Array.from({ length: totalPages }).map((_, index) => (
+
+                <button
+                  key={index}
+                  onClick={() => setCommitteePage(index)}
+                  className={`
+                    w-2.5
+                    h-2.5
+                    rounded-full
+                    transition-all
+                    duration-300
+                    ${
+                      committeePage === index
+                        ? "bg-accent scale-125"
+                        : "bg-foreground/30"
+                    }
+                  `}
+                  aria-label={`Go to committee group ${index + 1}`}
+                />
+
+              ))}
+
+            </div>
+
+
+            {/* Next */}
+            <button
+              onClick={() =>
+                setCommitteePage(
+                  (prev) => (prev + 1) % totalPages
+                )
+              }
+              className="
+                w-10
+                h-10
+                rounded-full
+                border
+                border-accent
+                text-accent
+                hover:bg-accent
+                hover:text-primary
+                transition-colors
+                flex
+                items-center
+                justify-center
+              "
+              aria-label="Next committee members"
+            >
+              →
+            </button>
+
+          </div>
+        )}
+
+      </div>
+
+
+      {/* Load More */}
+      {!showAllCommittee && (
+        <div className="flex justify-center mt-10">
+
+          <button
+            onClick={() => setShowAllCommittee(true)}
+            className="
+              flex
+              items-center
+              gap-3
+              px-6
+              py-3
+              border-2
+              border-accent
+              text-accent
+              font-sans
+              font-bold
+              rounded-lg
+              hover:bg-accent
+              hover:text-primary
+              transition-all
+              duration-300
+            "
+          >
+
+            <span className="text-xl">
+              +
+            </span>
+
+            View All Committee Members
+
+          </button>
+
+        </div>
+      )}
+
+    </div>
+
+  </div>
+</section>
 
       <section
   id="abstracts"
@@ -840,7 +1227,7 @@ export default function ConferencePage() {
                 name: 'Prof. Siddharth Gautam',
                 title: 'Assistant Professor',
                 institute: 'Dept. of Petroleum Enginnering, IIT(ISM)',
-                email: 'siddarth@iitism.ac.in',
+                email: 'sidharth@iitism.ac.in',
                 image: "/s_gautam.webp"
               },
             
