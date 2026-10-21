@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, MapPin, Calendar, Mail} from 'lucide-react';
 import Image from 'next/image';
+import { internationalCommittee } from './data/internationalCommittee';
+import { nationalCommittee } from './data/nationalCommittee';
 
 
 
@@ -13,80 +15,7 @@ export default function ConferencePage() {
   const logo_w = 125
   const logo_h = 125
   const MEMBERS_PER_PAGE = 4;
-  const internationalCommittee = [
-  {
-    name: "Prof. Sanjay Srinivasan",
-    institution: "Penn State University",
-    country: "USA",
-    image: "/committee/sanjay-srinivasan.png",
-  },
-  {
-    name: "Prof. Hemant Sarma",
-    institution: "University of Calgary",
-    country: "Canada",
-    image: "/committee/hemant-sarma.png",
-  },
-  {
-    name: "Prof. Anil Mehrotra",
-    institution: "University of Calgary",
-    country: "Canada",
-    image: "/committee/anil-mehrotra.png",
-  },
-  {
-    name: "Prof. Hari Vuthaluru",
-    institution: "Curtin University",
-    country: "Australia",
-    image: "/committee/hari-vuthaluru.png",
-  },
-  {
-    name: "Prof. Pisupati Sarma",
-    institution: "Penn State University",
-    country: "USA",
-    image: "/committee/pisupati-sarma.png",
-  },
-  {
-    name: "Prof. Mukul Sharma",
-    institution: "Texas & Austin",
-    country: "USA",
-    image: "/committee/mukul-sharma.png",
-  },
-  {
-    name: "Prof. Robello Samuel",
-    institution: "University of Houston",
-    country: "USA",
-    image: "/committee/robello-samuel.png",
-  },
-  {
-    name: "Prof. Saeedi Ali",
-    institution: "Curtin University",
-    country: "Australia",
-    image: "/committee/saeedi-ali.png",
-  },
-  {
-    name: "Prof. Hussain Hoteit",
-    institution: "KAUST",
-    country: "KSA",
-    image: "/committee/hussain-hoteit.png",
-  },
-  {
-    name: "Prof. Saad Al-Afnan",
-    institution: "KFUPM",
-    country: "KSA",
-    image: "/committee/saad-al-afnan.png",
-  },
-  {
-    name: "Prof. Marcio Augusto Sampaio Pinto",
-    institution: "USP",
-    country: "Brazil",
-    image: "/committee/marcio-pinto.png",
-  },
-  {
-    name: "Prof. Japan Trivedi",
-    institution: "University of Alberta",
-    country: "Canada",
-    image: "/committee/japan-trivedi.png",
-  },
-];
+  
 
 const [committeePage, setCommitteePage] = useState(0);
 const [showAllCommittee, setShowAllCommittee] = useState(false);
@@ -101,7 +30,31 @@ const visibleCommittee = showAllCommittee
       committeePage * MEMBERS_PER_PAGE,
       committeePage * MEMBERS_PER_PAGE + MEMBERS_PER_PAGE
     );
+const [nationalCommitteePage, setNationalCommitteePage] = useState(0);
+const [showAllNationalCommittee, setShowAllNationalCommittee] = useState(false);
 
+const nationalTotalPages = Math.ceil(
+  nationalCommittee.length / MEMBERS_PER_PAGE
+);
+
+const visibleNationalCommittee = showAllNationalCommittee
+  ? nationalCommittee
+  : nationalCommittee.slice(
+      nationalCommitteePage * MEMBERS_PER_PAGE,
+      nationalCommitteePage * MEMBERS_PER_PAGE + MEMBERS_PER_PAGE
+    );
+
+useEffect(() => {
+  if (showAllNationalCommittee || nationalTotalPages <= 1) return;
+
+  const interval = setInterval(() => {
+    setNationalCommitteePage((prev) =>
+      (prev - 1 + nationalTotalPages) % nationalTotalPages
+    );
+  }, 5000);
+
+  return () => clearInterval(interval);
+}, [showAllNationalCommittee, nationalTotalPages]);
 
 // Automatically move to the next group
 useEffect(() => {
@@ -639,18 +592,29 @@ useEffect(() => {
               {/* Photo */}
               <div className="flex-shrink-0">
 
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  width={110}
-                  height={110}
-                  className="
-                    w-[110px]
-                    h-[110px]
-                    object-cover
-                    rounded-lg
-                  "
-                />
+                <div className="
+  w-[90px]
+  h-[90px]
+  flex-shrink-0
+  rounded-lg
+  overflow-hidden
+  bg-foreground/5
+  flex
+  items-center
+  justify-center
+">
+  <Image
+    src={member.image}
+    alt={member.name}
+    width={90}
+    height={90}
+    className="
+      w-full
+      h-full
+      object-contain
+    "
+  />
+</div>
 
               </div>
 
@@ -785,43 +749,157 @@ useEffect(() => {
       </div>
 
 
-      {/* Load More */}
-      {!showAllCommittee && (
-        <div className="flex justify-center mt-10">
-
-          <button
-            onClick={() => setShowAllCommittee(true)}
-            className="
-              flex
-              items-center
-              gap-3
-              px-6
-              py-3
-              border-2
-              border-accent
-              text-accent
-              font-sans
-              font-bold
-              rounded-lg
-              hover:bg-accent
-              hover:text-primary
-              transition-all
-              duration-300
-            "
-          >
-
-            <span className="text-xl">
-              +
-            </span>
-
-            View All Committee Members
-
-          </button>
-
-        </div>
-      )}
+      
 
     </div>
+
+    <div className="mt-24">
+
+  <h3 className="font-serif text-3xl font-bold text-center mb-10">
+    National Advisory Committee
+  </h3>
+
+  <div className="relative">
+
+    {/* Committee Cards */}
+    <div
+      key={showAllNationalCommittee ? "all" : nationalCommitteePage}
+      className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${
+        showAllNationalCommittee ? "" : "committee-slide-right"
+      }`}
+    >
+
+      {visibleNationalCommittee.map((member) => (
+
+        <div
+          key={member.name}
+          className="
+            flex items-center gap-5
+            bg-white/5
+            border border-foreground/10
+            rounded-xl
+            p-5
+            transition-all duration-300
+            hover:-translate-y-1
+            hover:shadow-lg
+          "
+        >
+
+          {/* Photo */}
+          <div className="
+            w-[90px] h-[90px]
+            flex-shrink-0
+            rounded-lg
+            overflow-hidden
+            bg-foreground/5
+            flex items-center justify-center
+          ">
+            <Image
+              src={member.image}
+              alt={member.name}
+              width={90}
+              height={90}
+              className="w-full h-full object-contain"
+            />
+          </div>
+
+          {/* Information */}
+          <div className="min-w-0">
+
+            <h4 className="
+              font-sans text-xl font-bold
+              text-accent leading-tight
+            ">
+              {member.name}
+            </h4>
+
+            {member.designation && (
+              <p className="mt-2 text-sm text-foreground/70">
+                {member.designation}
+              </p>
+            )}
+
+            <p className="mt-2 text-base text-foreground/80">
+              {member.institution}
+            </p>
+
+
+          </div>
+
+        </div>
+
+      ))}
+
+    </div>
+
+    {/* Navigation Controls */}
+    {!showAllNationalCommittee && nationalTotalPages > 1 && (
+      <div className="flex justify-center items-center gap-6 mt-8">
+
+        {/* Previous */}
+        <button
+          onClick={() =>
+            setNationalCommitteePage((prev) =>
+              (prev - 1 + nationalTotalPages) % nationalTotalPages
+            )
+          }
+          className="
+            w-10 h-10 rounded-full
+            border border-accent text-accent
+            hover:bg-accent hover:text-primary
+            transition-colors
+            flex items-center justify-center
+          "
+          aria-label="Previous national committee members"
+        >
+          ←
+        </button>
+
+        {/* Page Indicators */}
+        <div className="flex gap-2">
+          {Array.from({ length: nationalTotalPages }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setNationalCommitteePage(index)}
+              className={`
+                w-2.5 h-2.5 rounded-full
+                transition-all duration-300
+                ${
+                  nationalCommitteePage === index
+                    ? "bg-accent scale-125"
+                    : "bg-foreground/30"
+                }
+              `}
+              aria-label={`Go to national committee group ${index + 1}`}
+            />
+          ))}
+        </div>
+
+        {/* Next */}
+        <button
+          onClick={() =>
+            setNationalCommitteePage((prev) =>
+              (prev + 1) % nationalTotalPages
+            )
+          }
+          className="
+            w-10 h-10 rounded-full
+            border border-accent text-accent
+            hover:bg-accent hover:text-primary
+            transition-colors
+            flex items-center justify-center
+          "
+          aria-label="Next national committee members"
+        >
+          →
+        </button>
+
+      </div>
+    )}
+
+  </div>
+
+</div>
 
   </div>
 </section>
@@ -1293,19 +1371,6 @@ useEffect(() => {
                 Send Message
               </button>
             </form>
-
-            {/* Social Links */}
-            {/* <div className="flex justify-center gap-6 mt-10 pt-8 border-t border-border">
-              <a href="#" className="p-3 rounded-full bg-muted hover:bg-accent/20 transition-colors">
-                <Linkedin size={20} className="text-primary" />
-              </a>
-              <a href="#" className="p-3 rounded-full bg-muted hover:bg-accent/20 transition-colors">
-                <Twitter size={20} className="text-primary" />
-              </a>
-              <a href="#" className="p-3 rounded-full bg-muted hover:bg-accent/20 transition-colors">
-                <Facebook size={20} className="text-primary" />
-              </a>
-            </div> */}
           </div>
         </div>
       </section>
