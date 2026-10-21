@@ -34,7 +34,7 @@ export const nationalCommittee: CommitteeMember[] = [
     name: "Mr. O.P. Sinha",
     designation: "Director (Exploration)",
     institution: "ONGC",
-    image: "/committee/op-sinha.png",
+    image: "/committee/o-p-sinha.png",
   },
   {
     name: "Mr. Dulal Haldar",
@@ -43,10 +43,10 @@ export const nationalCommittee: CommitteeMember[] = [
     image: "/committee/dulal-haldar.png",
   },
   {
-    name: "Prof. Baroruchi Mishra",
+    name: "Prof. Barouruchi Mishra",
     designation: "CMD",
     institution: "HOEC",
-    image: "/committee/baroruchi-mishra.png",
+    image: "/committee/barouruchi-mishra.png",
   },
   {
     name: "Dr. Vilas Tathavadkar",
