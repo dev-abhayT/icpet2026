@@ -101,7 +101,7 @@ export const nationalCommittee: CommitteeMember[] = [
     designation: "HoI, IRS",
     institution: "ONGC",
    
-    image: "/committee/dharam-pal.png",
+    image: "/committee/dharam-pal.jpeg",
   },
   {
     name: "Mr. Ajay Ratan",

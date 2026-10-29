@@ -17,32 +17,69 @@ export default function ConferencePage() {
   const MEMBERS_PER_PAGE = 4;
   
 
+
 const [committeePage, setCommitteePage] = useState(0);
 const [showAllCommittee, setShowAllCommittee] = useState(false);
 
-const totalPages = Math.ceil(
-  internationalCommittee.length / MEMBERS_PER_PAGE
+const mainCommitteeSize = Math.max(
+  0,
+  internationalCommittee.length - 5
 );
+
+const mainCommittee = internationalCommittee.slice(
+  0,
+  mainCommitteeSize
+);
+
+const lastFiveCommittee = internationalCommittee.slice(
+  mainCommitteeSize
+);
+
+const totalPages =
+  Math.ceil(mainCommittee.length / MEMBERS_PER_PAGE) +
+  (lastFiveCommittee.length > 0 ? 1 : 0);
 
 const visibleCommittee = showAllCommittee
   ? internationalCommittee
-  : internationalCommittee.slice(
-      committeePage * MEMBERS_PER_PAGE,
-      committeePage * MEMBERS_PER_PAGE + MEMBERS_PER_PAGE
-    );
+  : committeePage < Math.ceil(mainCommittee.length / MEMBERS_PER_PAGE)
+    ? mainCommittee.slice(
+        committeePage * MEMBERS_PER_PAGE,
+        committeePage * MEMBERS_PER_PAGE + MEMBERS_PER_PAGE
+      )
+    : lastFiveCommittee;
+
 const [nationalCommitteePage, setNationalCommitteePage] = useState(0);
 const [showAllNationalCommittee, setShowAllNationalCommittee] = useState(false);
 
-const nationalTotalPages = Math.ceil(
-  nationalCommittee.length / MEMBERS_PER_PAGE
+
+const MAIN_COMMITTEE_SIZE =
+  Math.max(0, nationalCommittee.length - 5);
+
+const mainNationalCommittee = nationalCommittee.slice(
+  0,
+  MAIN_COMMITTEE_SIZE
 );
+
+const lastFiveNationalCommittee = nationalCommittee.slice(
+  MAIN_COMMITTEE_SIZE
+);
+
+const mainCommitteePages = Math.ceil(
+  mainNationalCommittee.length / MEMBERS_PER_PAGE
+);
+
+const nationalTotalPages =
+  mainCommitteePages + (lastFiveNationalCommittee.length > 0 ? 1 : 0);
 
 const visibleNationalCommittee = showAllNationalCommittee
   ? nationalCommittee
-  : nationalCommittee.slice(
-      nationalCommitteePage * MEMBERS_PER_PAGE,
-      nationalCommitteePage * MEMBERS_PER_PAGE + MEMBERS_PER_PAGE
-    );
+  : nationalCommitteePage < mainCommitteePages
+    ? mainNationalCommittee.slice(
+        nationalCommitteePage * MEMBERS_PER_PAGE,
+        (nationalCommitteePage + 1) * MEMBERS_PER_PAGE
+      )
+    : lastFiveNationalCommittee;
+
 
 useEffect(() => {
   if (showAllNationalCommittee || nationalTotalPages <= 1) return;
@@ -570,7 +607,11 @@ useEffect(() => {
       {/* Committee Cards */}
       <div className="relative">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${
+    !showAllCommittee && committeePage === totalPages - 1
+      ? "[&>*:last-child]:md:col-span-2 [&>*:last-child]:md:w-1/2 [&>*:last-child]:md:justify-self-center"
+      : ""
+  }`}>
 
           {visibleCommittee.map((member, index) => (
 
@@ -764,7 +805,7 @@ useEffect(() => {
     {/* Committee Cards */}
     <div
       key={showAllNationalCommittee ? "all" : nationalCommitteePage}
-      className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${
+      className={`grid grid-cols-1 md:grid-cols-2 gap-6  ${
         showAllNationalCommittee ? "" : "committee-slide-right"
       }`}
     >
@@ -1215,7 +1256,7 @@ useEffect(() => {
                 role: 'Convenor',
                 name: 'Prof. Vikas Mahto',
                 title: 'Professor (HAG) & Head',
-                institute: 'Dept. of Petroleum Enginnering, IIT(ISM)',
+                institute: 'Dept. of Petroleum Engineering, IIT(ISM)',
                 email: 'vikas@iitism.ac.in',
                 image: "/vikas_mahto.jpg"
               },
@@ -1252,7 +1293,7 @@ useEffect(() => {
                 role: 'Co-Convenor',
                 name: 'Prof. Tarun Kumar Naiya',
                 title: 'Professor',
-                institute: 'Dept. of Petroleum Enginnering, IIT(ISM)',
+                institute: 'Dept. of Petroleum Engineering, IIT(ISM)',
                 email: 'tarunnaiya@iitism.ac.in',
                 image: "/tarun_naiya.jpg"
               },
@@ -1260,7 +1301,7 @@ useEffect(() => {
                 role: 'Co-Convenor',
                 name: 'Prof. Chandan Sahu',
                 title: 'Assistant Professor',
-                institute: 'Dept. of Petroleum Enginnering, IIT-ISM',
+                institute: 'Dept. of Petroleum Engineering, IIT-ISM',
                 email: 'chandansahu@iitism.ac.in',
                 image: "/chandan_sahu.jpeg"
               },
@@ -1302,9 +1343,9 @@ useEffect(() => {
             {[
               {
                 role: 'Organizing Secretary',
-                name: 'Prof. Siddharth Gautam',
+                name: 'Prof. Sidharth Gautam',
                 title: 'Assistant Professor',
-                institute: 'Dept. of Petroleum Enginnering, IIT(ISM)',
+                institute: 'Dept. of Petroleum Engineering, IIT(ISM)',
                 email: 'sidharth@iitism.ac.in',
                 image: "/s_gautam.webp"
               },
