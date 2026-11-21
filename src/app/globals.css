@@ -17,6 +17,22 @@
   animation: committeeSlideRight 0.65s ease-out both;
 }
 
+@keyframes committeeSlideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.committee-slide-left {
+  animation: committeeSlideLeft 0.65s ease-out both;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {

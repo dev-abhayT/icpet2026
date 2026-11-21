@@ -607,11 +607,16 @@ useEffect(() => {
       {/* Committee Cards */}
       <div className="relative">
 
-        <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${
+        <div
+  key={showAllCommittee ? "all" : committeePage}
+  className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${
+    showAllCommittee ? "" : "committee-slide-left"
+  } ${
     !showAllCommittee && committeePage === totalPages - 1
       ? "[&>*:last-child]:md:col-span-2 [&>*:last-child]:md:w-1/2 [&>*:last-child]:md:justify-self-center"
       : ""
-  }`}>
+  }`}
+>
 
           {visibleCommittee.map((member, index) => (
 
@@ -1177,7 +1182,6 @@ useEffect(() => {
 
     </div>
 
-
     {/* Final CTA */}
     <div className="text-center mt-10">
       <a
@@ -1189,6 +1193,50 @@ useEffect(() => {
         Submit Your Abstract →
       </a>
     </div>
+
+
+{/* Publication & Proceedings */}
+<div className="max-w-5xl mx-auto mt-16 border-t border-accent/40 pt-10">
+
+  <h3 className="font-serif text-3xl font-bold text-primary text-center mb-6">
+    Publication & Proceedings
+  </h3>
+
+  <div className="border-2 border-accent/60 rounded-xl p-6 md:p-8">
+
+    <p className="font-sans text-foreground/80 leading-relaxed mb-5">
+      Selected papers from the conference will be published by
+      Springer as a proceedings book volume. Springer will conduct
+      quality checks on the accepted papers, and only papers that
+      pass these checks will be published.
+    </p>
+
+    <p className="font-sans font-bold text-primary mb-3">
+      Publication Guidelines
+    </p>
+
+    <p className="font-sans text-foreground/80 leading-relaxed mb-5">
+      We do not publish abstracts, extended abstracts, literature
+      review articles, policy reviews, or questionnaire/survey or
+      interview-based papers. Only full papers presenting original
+      research with new outcomes will be considered for publication
+      in the proceedings. Papers must be at least 6 pages long.
+    </p>
+
+    <div className="bg-accent/10 rounded-lg p-4 flex gap-3 items-start">
+      <span className="text-accent text-xl">✓</span>
+      <p className="font-sans text-foreground/80 leading-relaxed">
+        Springer Nature does not charge any publication fee for
+        Non-Open Access content.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+
+
+    
 
   </div>
 </section>
